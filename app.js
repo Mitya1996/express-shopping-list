@@ -4,12 +4,12 @@ const ExpressError = require("./expressError");
 
 const app = express();
 app.use(express.json());
-app.use("/item", itemsRoutes);
+app.use("/items", itemsRoutes);
 
 /** 404 handler */
 
 app.use(function (req, res, next) {
-  return new ExpressError("Not Found", 404);
+  throw new ExpressError("Not Found", 404);
 });
 
 /** general error handler */
@@ -22,6 +22,4 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("listening on port 3000");
-});
+module.exports = app;
